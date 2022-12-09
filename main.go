@@ -7,27 +7,21 @@ import "luago/state"
 
 func main() {
 	ls := state.New()
-
-	// push 基本类型
-	ls.PushBoolean(true)
-	printStack(ls)
-	ls.PushInteger(10)
-	printStack(ls)
-	ls.PushNil()
-	printStack(ls)
-	ls.PushString("hello")
+	ls.PushInteger(1)
+	ls.PushString("2.0")
+	ls.PushString("3.0")
+	ls.PushNumber(4.0)
 	printStack(ls)
 
-	// push 栈上元素
-	ls.PushValue(-4)
+	ls.Arith(LUA_OPADD)
 	printStack(ls)
-	ls.Replace(3)
+	ls.Arith(LUA_OPBNOT)
 	printStack(ls)
-	ls.SetTop(6)
+	ls.Len(2)
 	printStack(ls)
-	ls.Remove(-3)
+	ls.Concat(3)
 	printStack(ls)
-	ls.SetTop(-5)
+	ls.PushBoolean(ls.Compare(1, 2, LUA_OPEQ))
 	printStack(ls)
 }
 
