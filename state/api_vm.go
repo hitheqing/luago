@@ -12,6 +12,7 @@ func (self *luaState) AddPC(n int) {
 
 func (self *luaState) Fetch() uint32 {
 	i := self.proto.Code[self.pc]
+	self.pc++
 	return i
 }
 

@@ -1,34 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"luago/binchunk"
+	"luago/state"
+	. "luago/vm"
+	"os"
+)
 import . "luago/api"
 import _ "luago/binchunk"
 
 func main() {
-	//ls := state.New()
-	//ls.PushInteger(1)
-	//ls.PushString("2.0")
-	//ls.PushString("3.0")
-	//ls.PushNumber(4.0)
-	//printStack(ls)
-	////[1]["2.0"]["3.0"][4]
-	//
-	//ls.Arith(LUA_OPADD)
-	//printStack(ls)
-	////[1]["2.0"][7]
-	//
-	//ls.Arith(LUA_OPBNOT)
-	//printStack(ls)
-	////[1]["2.0"][-8]
-	//ls.Len(2)
-	//printStack(ls)
-	////[1]["2.0"][-8][3]
-	//ls.Concat(3)
-	//printStack(ls)
-	////[1]["2.0-83"]
-	//ls.PushBoolean(ls.Compare(1, 2, LUA_OPEQ))
-	//printStack(ls)
-	//[1]["2.0-83"][false]
+	if len(os.Args) > 1 {
+		data, err := os.ReadFile(os.Args[1])
+		if err != nil {
+			panic(err)
+		}
+		proto := binchunk.Undump(data)
+		luaMain(proto)
+	}
+}
+
+func luaMain(proto *binchunk.Prototype) {
+	nRegs := int(proto.MaxStackSize)
+	ls := state.New(nRegs+8, proto)
+	ls.SetTop(nRegs)
+	for {
+		pc := ls.PC()
+		inst := Instruction(ls.Fetch())
+		if inst.Opcode() != OP_RETURN {
+			inst.Execute(ls)
+			fmt.Printf("[%02d] %s ", pc+1, inst.OpName())
+			printStack(ls)
+		} else {
+			break
+		}
+	}
 }
 
 func printStack(ls LuaState) {

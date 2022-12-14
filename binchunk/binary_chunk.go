@@ -7,7 +7,7 @@ const (
 	LUAC_DATA     = "\x19\x93\r\n\x1a\n" // 文件损坏不加载
 	// 长度
 	CINT_SIZE        = 4 //
-	CSIZET_SIZE      = 4
+	CSIZET_SIZE      = 8
 	INSTRUCTION_SIZE = 4
 	LUA_INTEGER_SIZE = 8
 	LUA_NUMBER_SIZE  = 8
