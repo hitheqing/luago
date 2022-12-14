@@ -4,6 +4,10 @@ type LuaType = int
 type ArithOp = int
 type CompareOp = int
 
+/*
+目前为止luastate包含的功能
+读写栈/栈上算术运算/封装栈上的按类型访问helper
+*/
 type LuaState interface {
 	/* basic stack manipulation */
 	GetTop() int

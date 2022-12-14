@@ -14,6 +14,7 @@ func (self *luaState) Len(idx int) {
 
 // [-n, +1, e]
 // http://www.lua.org/manual/5.3/manual.html#lua_concat
+// 依次连接栈顶n个元素
 func (self *luaState) Concat(n int) {
 	if n == 0 {
 		self.stack.push("")
