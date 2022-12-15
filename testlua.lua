@@ -1,7 +1,10 @@
 do
-local s = 0
-for i=1,10 do
-    if i%2==0 then s = s+i end
-end
-print(s)
+    local t = { "a", "b", "c" }
+    --
+    t[2] = "BB"
+    --a BB c
+    t["foo"]="bar"
+    local s = t[3]..t[2]..t[1]..t["foo"]..#t
+    --cBBabar3
+    --print(s)
 end

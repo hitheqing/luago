@@ -1,6 +1,8 @@
 package state
 
-import "luago/binchunk"
+import (
+	"luago/binchunk"
+)
 
 type luaState struct {
 	// luaState 目前仅有一个栈可供操作
