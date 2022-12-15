@@ -92,7 +92,7 @@ type opcode struct {
 }
 
 var opcodes = []opcode{
-	/*     T  A    B       C     mode         name    */
+	/*     T  A    B       C     mode         name    	 action 	*/
 	opcode{0, 1, OpArgR, OpArgN, IABC /* */, "MOVE    ", move},     // R(A) := R(B)
 	opcode{0, 1, OpArgK, OpArgN, IABx /* */, "LOADK   ", loadK},    // R(A) := Kst(Bx)
 	opcode{0, 1, OpArgN, OpArgN, IABx /* */, "LOADKX  ", loadKx},   // R(A) := Kst(extra arg)
@@ -121,7 +121,7 @@ var opcodes = []opcode{
 	opcode{0, 1, OpArgR, OpArgN, IABC /* */, "UNM     ", unm},      // R(A) := -R(B)
 	opcode{0, 1, OpArgR, OpArgN, IABC /* */, "BNOT    ", bnot},     // R(A) := ~R(B)
 	opcode{0, 1, OpArgR, OpArgN, IABC /* */, "NOT     ", not},      // R(A) := not R(B)
-	opcode{0, 1, OpArgR, OpArgN, IABC /* */, "LEN     ", len},      // R(A) := length of R(B)
+	opcode{0, 1, OpArgR, OpArgN, IABC /* */, "LEN     ", _len},     // R(A) := length of R(B)
 	opcode{0, 1, OpArgR, OpArgR, IABC /* */, "CONCAT  ", concat},   // R(A) := R(B).. ... ..R(C)
 	opcode{0, 0, OpArgR, OpArgN, IAsBx /**/, "JMP     ", jmp},      // pc+=sBx; if (A) close all upvalues >= R(A - 1)
 	opcode{1, 0, OpArgK, OpArgK, IABC /* */, "EQ      ", eq},       // if ((RK(B) == RK(C)) ~= A) then pc++

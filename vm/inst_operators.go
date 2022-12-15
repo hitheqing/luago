@@ -39,7 +39,7 @@ func unm(i Instruction, vm LuaVM)  { unaryop(i, vm, LUA_OPUNM) }   // -
 func bnot(i Instruction, vm LuaVM) { unaryop(i, vm, LUA_OPBNOT) }  // ~ 按位取反
 
 // ra = length of rb
-func len(i Instruction, vm LuaVM) {
+func _len(i Instruction, vm LuaVM) {
 	a, b, _ := i.ABC()
 	a++
 	b++
